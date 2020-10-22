@@ -1,6 +1,12 @@
-- name: Pull centos image
+- name: Create container
   hosts: dockerhost
   tasks:
-  - name: pull
-    docker_image:
-      name: centos
+  - name: web container
+    docker_container:
+      name: web
+      image: webimage
+      state: started
+      ports:
+      - "8080:80"
+      tty: true
+      detach: true
